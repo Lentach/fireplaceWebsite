@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://fireplace.ignorelist.com/welcome/">
-    <img src="public/og.png" alt="Fireplace — messages only two people can read" width="720">
+    <img src="docs/screens/hero.webp" alt="Fireplace — messages only two people can read" width="840">
   </a>
 </p>
 
@@ -18,6 +18,52 @@
   ·
   <a href="https://fireplace.ignorelist.com/"><strong>Open the app</strong></a>
 </p>
+
+---
+
+## A scroll through the page
+
+One message, followed from Bob's phone to Kate's — the whole page is that journey.
+
+<table>
+  <tr>
+    <td width="50%">
+      <img src="docs/screens/journey-send.webp" alt="Press send — or just keep scrolling"><br>
+      <sub><strong>01 — You send it.</strong> Press send yourself, or just keep scrolling; the page sends it for you.</sub>
+    </td>
+    <td width="50%">
+      <img src="docs/screens/journey-relay.webp" alt="Ciphertext, inside TLS — the wire"><br>
+      <sub><strong>03 — In transit.</strong> Ciphertext inside TLS. Anyone listening — provider, wifi, anyone — records noise.</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src="docs/screens/journey-delivered.webp" alt="We pass the letter. Still sealed."><br>
+      <sub><strong>05 — Relayed.</strong> The envelope moves the instant Kate is reachable. Same ciphertext in, same out.</sub>
+    </td>
+    <td width="50%">
+      <img src="docs/screens/features.webp" alt="Private by construction, not by promise"><br>
+      <sub><strong>Private by construction.</strong> Signal protocol on every message, a server that knows nothing, deletes that delete.</sub>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td width="66%">
+      <img src="docs/screens/outro.webp" alt="That's the whole story. We're just the courier."><br>
+      <sub><strong>The whole story.</strong> Runs in your browser, installs as an app, free.</sub>
+    </td>
+    <td width="34%">
+      <img src="docs/screens/mobile-hero.webp" alt="Fireplace landing on mobile"><br>
+      <sub><strong>Fully responsive.</strong> Same journey, one hand.</sub>
+    </td>
+  </tr>
+</table>
+
+Every capture above is the live page — type in the hero terminal and the
+ciphertext line re-seals with your words; they even ride along into the
+journey's chat bubbles.
 
 ---
 
