@@ -6,7 +6,10 @@ const app = 'https://fireplace.ignorelist.com/';
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-visual" />
+  <!-- maximum-scale=1 kills iOS Safari's auto-zoom when a small-font input is
+       focused (the zoom persisted across refresh); since iOS 10 Safari IGNORES
+       it for manual pinch, so accessibility zoom still works. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, interactive-widget=resizes-visual" />
   <title>Fireplace — messages only two people can read</title>
   <meta name="description" content="End-to-end encrypted chat. Signal protocol on every message, delete removes both sides. Follow one message end to end and see exactly what our server sees: nothing readable." />
   <meta property="og:title" content="Fireplace — messages only two people can read" />
