@@ -274,7 +274,8 @@ export function initJourney(section: HTMLElement) {
     el.addEventListener('focus', () => {
       // after a dismiss, the tap's synthesized click can land on the input as the
       // phone reflows and re-open the keyboard — reject that refocus for a beat
-      if (performance.now() < kbSuppressUntil) { el.blur(); return; }
+      // iOS ignores a blur() called synchronously inside focus dispatch — defer it
+      if (performance.now() < kbSuppressUntil) { setTimeout(() => el.blur(), 0); return; }
       el.select();
       // mobile: opening the keyboard shrinks the viewport and drifts scroll.
       // Freeze the journey and pin this device above the keyboard (real chat) —
@@ -313,6 +314,17 @@ export function initJourney(section: HTMLElement) {
     if (t && t.closest('.compose')) return;
     releaseKb()?.blur();
   }, true);
+  // iOS: after the pointerdown dismiss the pill hides and the phone reflows,
+  // so the tap's SYNTHESIZED click (fired at touchend, same coordinates) can
+  // land on the reflowed textarea and bounce the keyboard right back up.
+  // Swallow that touchend over a composer during the suppress window — the
+  // synthesized click (and its refocus) never fires. Android doesn't re-target
+  // the tap this way, so this is iOS-only in effect.
+  document.addEventListener('touchend', (e) => {
+    if (performance.now() >= kbSuppressUntil) return;
+    const t = e.target as HTMLElement | null;
+    if (t && t.closest('.compose')) e.preventDefault();
+  }, { capture: true, passive: false });
   // the sender ships with a prefilled draft — size its pill NOW, and again
   // once the mono font arrives (glyph metrics change the wrap points)
   autoGrow(draft); autoGrow(draftR);
