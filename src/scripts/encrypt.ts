@@ -52,6 +52,24 @@ export function initEncrypt(root: HTMLElement) {
     e.stopPropagation();
     doneAt = performance.now();
     input.blur();
+    // iOS: once the pill hides mid-gesture, the tap's SYNTHESIZED click
+    // retargets to whatever sits under the finger — usually the textarea
+    // itself, which the browser then focuses NATIVELY (the doneAt guard only
+    // stops the programmatic focus in the port click handler, not this).
+    // Kill the gesture's own touchend so the click never synthesizes, and
+    // hold the field readonly for a beat — a readonly field can never reopen
+    // the keyboard, whatever manages to refocus it.
+    if (e.pointerType === 'touch') {
+      input.readOnly = true;
+      setTimeout(() => { input.readOnly = false; }, 700);
+      const swallow = (te: TouchEvent) => { te.preventDefault(); };
+      document.addEventListener('touchend', swallow, { capture: true, passive: false, once: true });
+      // a gesture that turns into a scroll ends in touchcancel — drop the
+      // pending swallow so the NEXT unrelated tap isn't eaten
+      document.addEventListener('touchcancel', () => {
+        document.removeEventListener('touchend', swallow, true);
+      }, { capture: true, once: true });
+    }
   });
 
   const setLen = (n: number) => {
