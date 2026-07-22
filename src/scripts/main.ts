@@ -29,33 +29,6 @@ if (contact) initContact(contact);
 const journey = document.querySelector<HTMLElement>('.journey');
 if (journey) initJourney(journey);
 
-/* ?kbdebug — on-page focus/keyboard tracer for diagnosing the iOS keyboard
-   bounce on a physical phone (no remote inspector available). Shows the last
-   events: what gains/loses focus, what taps land on, and visualViewport height
-   (the keyboard's footprint). Read the overlay when the bounce happens. */
-if (location.search.includes('kbdebug')) {
-  const box = document.createElement('div');
-  box.style.cssText = 'position:fixed;left:4px;top:4px;z-index:9999;background:rgba(0,0,0,.85);color:#7CFC00;font:10px/1.35 monospace;padding:6px;pointer-events:none;white-space:pre;max-width:96vw;border-radius:6px';
-  document.body.appendChild(box);
-  const lines: string[] = [];
-  const log = (s: string) => {
-    lines.push(`${(performance.now() / 1000).toFixed(2)} ${s}`);
-    while (lines.length > 14) lines.shift();
-    box.textContent = lines.join('\n');
-  };
-  const name = (t: EventTarget | null) => {
-    const el = t instanceof HTMLElement ? t : null;
-    if (!el) return String(t);
-    const cls = (el.getAttribute('class') || '').split(' ')[0];
-    return `${el.tagName}${el.id ? '#' + el.id : ''}${cls ? '.' + cls : ''}`;
-  };
-  for (const ev of ['focusin', 'focusout', 'pointerdown', 'touchend', 'touchcancel'] as const) {
-    document.addEventListener(ev, (e) => log(`${ev} ${name(e.target)}`), true);
-  }
-  window.visualViewport?.addEventListener('resize', () => log(`vv ${Math.round(window.visualViewport!.height)}`));
-  log(`start vv ${Math.round(window.visualViewport?.height ?? innerHeight)}`);
-}
-
 /* clicking the wordmark refreshes the page (owner request) */
 document.querySelector<HTMLElement>('nav .mark')?.addEventListener('click', () => location.reload());
 
