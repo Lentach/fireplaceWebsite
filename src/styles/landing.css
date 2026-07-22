@@ -123,8 +123,10 @@ nav .links a:focus-visible,
   text-transform: uppercase; color: #04121c; background: var(--ice);
   border: 0; border-radius: 999px; padding: 5px 12px;
 }
-/* touch only — a soft-keyboard exit; on desktop (no keyboard) it's noise */
-@media (max-width: 999px) {
+/* touch only — a soft-keyboard exit; a narrow DESKTOP window (mouse) has no
+   keyboard to dismiss, so the pill would be noise there. Same coarse-pointer
+   gate as the journey Done pill (journey.ts). */
+@media (max-width: 999px) and (pointer: coarse) {
   .enc-terminal .enc-port:focus-within .enc-done { display: inline-flex; }
 }
 .enc-terminal .enc-port-rail {
