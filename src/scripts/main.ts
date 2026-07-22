@@ -2,6 +2,7 @@ import Lenis from 'lenis';
 import { initGlobe } from './globe';
 import { initEncrypt } from './encrypt';
 import { initJourney } from './journey';
+import { initContact } from './contact';
 import { drawSingularity, makeShell } from './shell';
 import { drawStars, fit, makeStars, rafOnScreen } from './util';
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -19,6 +20,10 @@ requestAnimationFrame(raf);
 const globeCanvas = document.querySelector<HTMLCanvasElement>('.hero canvas');
 if (globeCanvas) initGlobe(globeCanvas);
 document.querySelectorAll<HTMLElement>('[data-encrypt]').forEach(initEncrypt);
+
+/* contact form (section before the footer) */
+const contact = document.querySelector<HTMLElement>('.contact');
+if (contact) initContact(contact);
 
 /* journey */
 const journey = document.querySelector<HTMLElement>('.journey');

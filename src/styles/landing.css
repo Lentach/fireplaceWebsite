@@ -560,3 +560,73 @@ footer { background: #000; position: relative; overflow-x: clip; }
     animation: none !important;
   }
 }
+
+/* ============ CONTACT (before the footer) ============ */
+.contact {
+  position: relative; z-index: 2;
+  padding: 4vh 5vw 12vh; display: flex; justify-content: center;
+}
+.contact .c-panel {
+  width: 100%; max-width: 560px;
+  background: rgba(10, 16, 22, .6); border: 1px solid rgba(143, 216, 255, .18);
+  padding: 18px 20px 16px;
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+.contact .c-label-row {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  margin-bottom: 10px;
+}
+.contact .c-label-row label {
+  font-size: 10px; letter-spacing: .24em; text-transform: uppercase;
+  color: rgba(143, 216, 255, .72);
+}
+.contact .c-status {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 8px; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(143, 216, 255, .42); white-space: nowrap;
+}
+.contact .c-status i {
+  width: 5px; height: 5px; border-radius: 50%; background: var(--ice);
+  box-shadow: 0 0 8px rgba(143, 216, 255, .75);
+}
+.contact .c-status.ok { color: rgba(143, 255, 190, .75); }
+.contact .c-status.ok i { background: #8fffbe; box-shadow: 0 0 8px rgba(143, 255, 190, .75); }
+.contact .c-status.err { color: rgba(255, 160, 150, .8); }
+.contact .c-status.err i { background: #ffa096; box-shadow: 0 0 8px rgba(255, 160, 150, .8); }
+.contact textarea {
+  display: block; width: 100%; background: transparent; border: none; outline: none;
+  color: inherit; font-family: 'IBM Plex Mono', monospace; font-size: 14px;
+  line-height: 1.55; padding: 6px 0; resize: vertical; min-height: 88px;
+  border-bottom: 1px solid rgba(143, 216, 255, .25);
+  caret-color: var(--ice);
+}
+.contact textarea:focus { border-bottom-color: var(--ice); }
+.contact textarea::placeholder,
+.contact .c-row input::placeholder { color: rgba(238, 246, 251, .28); }
+.contact .c-row { display: flex; gap: 12px; margin-top: 12px; align-items: center; }
+.contact .c-row input {
+  flex: 1; min-width: 0; background: transparent; border: none; outline: none;
+  color: inherit; font-family: 'IBM Plex Mono', monospace; font-size: 12px;
+  padding: 8px 0; border-bottom: 1px solid rgba(143, 216, 255, .18);
+  caret-color: var(--ice);
+}
+.contact .c-row input:focus { border-bottom-color: var(--ice); }
+.contact .c-send {
+  flex: 0 0 auto; cursor: pointer;
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .18em;
+  text-transform: uppercase; color: #04121c; background: var(--ice);
+  border: 0; border-radius: 999px; padding: 8px 18px;
+  transition: box-shadow .2s;
+}
+.contact .c-send:hover { box-shadow: 0 0 14px rgba(143, 216, 255, .5); }
+/* honeypot: visually gone, still in the DOM for bots that fill every field */
+.contact .c-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.contact .c-note {
+  margin-top: 12px; font-size: 8px; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(143, 216, 255, .34);
+}
+.contact .c-send:focus-visible,
+.contact textarea:focus-visible,
+.contact .c-row input:focus-visible {
+  outline: 2px solid var(--ice); outline-offset: 2px;
+}
