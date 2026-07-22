@@ -308,23 +308,29 @@ export function initJourney(section: HTMLElement) {
   // so the pill hides. .compose stays excluded so taps inside the composer
   // (field, send button) keep the keyboard up.
   const kbDone = document.querySelector<HTMLButtonElement>('.kb-done');
+  let kbSwallowTap = false;   // dismiss gesture in flight — eat its touchend
   document.addEventListener('pointerdown', (e) => {
     if (!kbLift) return;
     const t = e.target as HTMLElement | null;
     if (t && t.closest('.compose')) return;
     releaseKb()?.blur();
+    if (e.pointerType === 'touch') kbSwallowTap = true;
   }, true);
-  // iOS: after the pointerdown dismiss the pill hides and the phone reflows,
-  // so the tap's SYNTHESIZED click (fired at touchend, same coordinates) can
-  // land on the reflowed textarea and bounce the keyboard right back up.
-  // Swallow that touchend over a composer during the suppress window — the
-  // synthesized click (and its refocus) never fires. Android doesn't re-target
+  // iOS: after the pointerdown dismiss the pill hides and the phone reflows.
+  // touch events keep their touchSTART target for the whole gesture, but the
+  // SYNTHESIZED click hit-tests fresh coordinates at touchend — and can land
+  // on the reflowed textarea, refocusing it and bouncing the keyboard back up.
+  // preventDefault on the dismiss gesture's own touchend (one-shot flag armed
+  // above) cancels that synthesized click entirely. Android doesn't re-target
   // the tap this way, so this is iOS-only in effect.
   document.addEventListener('touchend', (e) => {
-    if (performance.now() >= kbSuppressUntil) return;
-    const t = e.target as HTMLElement | null;
-    if (t && t.closest('.compose')) e.preventDefault();
+    if (!kbSwallowTap) return;
+    kbSwallowTap = false;
+    e.preventDefault();
   }, { capture: true, passive: false });
+  // a dismiss gesture that turns into a scroll ends in touchCANCEL — disarm,
+  // or the next unrelated tap's touchend would be swallowed
+  document.addEventListener('touchcancel', () => { kbSwallowTap = false; }, true);
   // the sender ships with a prefilled draft — size its pill NOW, and again
   // once the mono font arrives (glyph metrics change the wrap points)
   autoGrow(draft); autoGrow(draftR);
