@@ -292,8 +292,16 @@ export function initJourney(section: HTMLElement) {
   // release the keyboard freeze: clear state + drop the fixed lift on both phones
   function releaseKb() {
     kbSuppressUntil = performance.now() + 600;
+    // iOS hammer: even with the synthesized click cancelled, iOS can still
+    // restore focus after the keyboard-hide animation and bounce it back up.
+    // A READONLY field never opens the keyboard — so whatever refocuses during
+    // the suppress window hits a wall. Restored just after the window closes.
     const el = kbLift;
     kbLift = null;
+    if (el) {
+      draft.readOnly = true; draftR.readOnly = true;
+      setTimeout(() => { draft.readOnly = false; draftR.readOnly = false; }, 700);
+    }
     document.body.classList.remove('kb-open');
     $('.phone.sender').classList.remove('kb-lift');
     $('.phone.recipient').classList.remove('kb-lift');
