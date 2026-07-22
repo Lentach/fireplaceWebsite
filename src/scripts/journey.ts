@@ -277,8 +277,14 @@ export function initJourney(section: HTMLElement) {
       if (performance.now() < kbSuppressUntil) { el.blur(); return; }
       el.select();
       // mobile: opening the keyboard shrinks the viewport and drifts scroll.
-      // Freeze the journey and pin this device above the keyboard (real chat).
-      if (innerWidth < 1000) { kbLift = el; document.body.classList.add('kb-open'); }
+      // Freeze the journey and pin this device above the keyboard (real chat) —
+      // but ONLY on a touch device with a soft keyboard. A narrow desktop window
+      // (<1000px, mouse) has no keyboard to dismiss, so entering compose-mode
+      // there would just orphan the "Done" pill at the top. Gate on a coarse pointer.
+      if (innerWidth < 1000 && matchMedia('(pointer: coarse)').matches) {
+        kbLift = el;
+        document.body.classList.add('kb-open');
+      }
     });
     el.addEventListener('blur', () => { if (kbLift === el) releaseKb(); });
   }
