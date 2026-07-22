@@ -2,9 +2,12 @@
 
 Static marketing page served at `https://fireplace.ignorelist.com/welcome/`.
 Astro + Lenis + hand-rolled canvas modules — no GSAP (the journey is a custom
-scroll-progress engine, validated in `docs/design/landing-prototype/`).
-The PWA stays untouched at `/` (never move its path — service-worker scope +
-local E2E Signal keys).
+scroll-progress engine, prototyped in the main Fireplace repo under
+`docs/design/landing-prototype/`).
+Lives in its own repo, extracted from the `Lentach/Fireplace` monorepo
+(2026-07-22, history preserved). The PWA stays untouched at `/` on the same
+host (never move its path — service-worker scope + local E2E Signal keys);
+its code lives in the main repo.
 
 ## Structure
 
@@ -25,7 +28,6 @@ Content honesty rules (do not regress):
 ## Local dev
 
 ```bash
-cd landing
 npm install
 npm run dev        # http://localhost:4321/welcome
 npm run build && npm run preview
@@ -34,7 +36,7 @@ npm run build && npm run preview
 ## Deploy (from the dev PC)
 
 ```powershell
-cd landing ; .\deploy-landing.ps1
+.\deploy-landing.ps1
 ```
 
 Builds, uploads to a staging dir on the VM, atomic-swaps into

@@ -1,0 +1,13 @@
+# Dependabot: security-focused, low-noise (solo maintainer) — mirrors the
+# main Fireplace repo's policy. Security updates are governed by repo
+# Settings -> Code security (enable alerts + security updates there).
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 3
+    groups:
+      landing-minor-patch:
+        update-types: [minor, patch]
