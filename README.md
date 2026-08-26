@@ -1,10 +1,10 @@
 <p align="center">
   <a href="https://fireplace.ignorelist.com/welcome/">
-    <img src="docs/screens/hero.webp" alt="Fireplace — messages only two people can read" width="840">
+    <img src="docs/screens/hero.webp" alt="Umbra — messages only two people can read" width="840">
   </a>
 </p>
 
-<h1 align="center">Fireplace</h1>
+<h1 align="center">Umbra</h1>
 
 <p align="center">
   <strong>Messages only two people can read.</strong><br>
@@ -55,7 +55,7 @@ One message, followed from Bob's phone to Kate's — the whole page is that jour
       <sub><strong>The whole story.</strong> Runs in your browser, installs as an app, free.</sub>
     </td>
     <td width="34%">
-      <img src="docs/screens/mobile-hero.webp" alt="Fireplace landing on mobile"><br>
+      <img src="docs/screens/mobile-hero.webp" alt="Umbra landing on mobile"><br>
       <sub><strong>Fully responsive.</strong> Same journey, one hand.</sub>
     </td>
   </tr>
@@ -69,7 +69,7 @@ journey's chat bubbles.
 
 ## What this repo is
 
-The source of Fireplace's landing page — the site's business card, served at
+The source of Umbra's landing page — the site's business card, served at
 [`fireplace.ignorelist.com/welcome/`](https://fireplace.ignorelist.com/welcome/).
 
 It's a single static page, built by hand:
@@ -83,7 +83,7 @@ It's a single static page, built by hand:
   into the real `3:` PreKey envelope shape; write in the phone composer and send
   the message yourself.
 
-The Fireplace app itself (Flutter PWA + NestJS backend) lives in the main
+The Umbra app itself (Flutter PWA + NestJS backend) lives in the main
 [`Lentach/Fireplace`](https://github.com/Lentach/Fireplace) repository.
 
 ## Content honesty rules (do not regress)

@@ -1,4 +1,4 @@
-// Contact form: POST /contact on the Fireplace backend (same origin — the
+// Contact form: POST /contact on the Umbra backend (same origin — the
 // message never touches a third party). Honeypot field + server-side 5/15min
 // per-IP throttle; the backend stores the row and pings the owner's devices.
 export function initContact(root: HTMLElement) {

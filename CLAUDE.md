@@ -1,9 +1,9 @@
-# CLAUDE.md — Fireplace landing (`/welcome`)
+# CLAUDE.md — Umbra landing (`/welcome`)
 
-Standalone repo for the Fireplace marketing page at
+Standalone repo for the Umbra marketing page at
 `https://fireplace.ignorelist.com/welcome/`. Extracted from the
 `Lentach/Fireplace` monorepo on 2026-07-22 (git history preserved).
-The Fireplace PWA + backend live in the main repo — never touch `/` on the VM.
+The Umbra PWA + backend live in the main repo — never touch `/` on the VM.
 
 ## Ground rules
 
