@@ -23,7 +23,7 @@ ssh $VM "test -f $staging/index.html && chmod -R a+rX $staging && rm -rf ~/firep
 
 Write-Host '== verify =='
 $resp = Invoke-WebRequest -Uri 'https://fireplace.ignorelist.com/welcome/' -UseBasicParsing
-if ($resp.StatusCode -eq 200 -and $resp.Content -match 'Fireplace') {
+if ($resp.StatusCode -eq 200 -and $resp.Content -match 'Umbra') {
   Write-Host 'VERIFIED: /welcome/ serves the landing page.'
 } else {
   throw "verification failed: HTTP $($resp.StatusCode)"
