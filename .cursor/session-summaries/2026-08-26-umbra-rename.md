@@ -7,9 +7,11 @@
   from the app repo (`.planning/branding/umbra-s5-silver.svg` + foreground
   variant); PNGs re-rendered with the branding rasterizer at matching sizes.
 - Intentionally untouched: every `fireplace.ignorelist.com` URL, canonical/OG
-  URLs, `astro.config.mjs` base, `sitemap.xml`, `deploy-landing.ps1`
-  (its `-match 'Fireplace'` verify still passes — case-insensitive, URLs remain),
-  `package.json` name, `Lentach/Fireplace` repo links.
+  URLs, `astro.config.mjs` base, `sitemap.xml`, `package.json` name,
+  `Lentach/Fireplace` repo links.
+- `deploy-landing.ps1:26` verify changed `-match 'Fireplace'` → `-match 'Umbra'`
+  (b96e076): after the rename the old pattern only matched URLs, asserting
+  nothing about rendered brand content. First post-merge deploy passes it.
 - Needs owner: new `public/og.png` art, recaptured `docs/screens/*.webp` after
   deploy, GitHub repo rename, domain decision.
 - Verified: `npm ci && npm run build` green in the `feat/umbra-rename` worktree;
