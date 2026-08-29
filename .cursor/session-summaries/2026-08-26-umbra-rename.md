@@ -21,3 +21,4 @@
 - PR #3 merged (`69caf87`), incl. `dd4338d`: favicon/logo recolored to the E1 ember hex (parity with app 0.1.20) + new `public/og.png` (1200x630, ember hex + Umbra wordmark).
 - `deploy-landing.ps1` died exit-21 at the swap (same Kaspersky-class halt as the app repo); manual stage+swap → PUBLISHED_OK. Verified live: /welcome/ 200 with Umbra, favicon serves #FFE9B8 ember, og.png byte-identical to repo.
 - Still owed: README screenshot recapture (docs/screens/*.webp show old brand), repo rename, domain decision.
+- **2026-08-29 owner-caught miss: header/footer wordmarks were `FIRE<b>PLACE</b>` split spans — invisible to every grep for "fireplace" (the contiguous string never existed). Fixed in `0d0fa13`, manually published, live-verified (0 split spans, UMBRA x2). LESSON: brand sweeps must check the RENDERED page, not just grep the source — split-span/two-tone wordmarks defeat string search.**
