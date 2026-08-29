@@ -23,11 +23,15 @@ ssh $VM "test -f $staging/index.html && chmod -R a+rX $staging && rm -rf ~/firep
 
 Write-Host '== verify =='
 $resp = Invoke-WebRequest -Uri 'https://fireplace.ignorelist.com/welcome/' -UseBasicParsing
-if ($resp.StatusCode -eq 200 -and $resp.Content -match 'Umbra') {
-  Write-Host 'VERIFIED: /welcome/ serves the landing page.'
-} else {
-  throw "verification failed: HTTP $($resp.StatusCode)"
-}
+if ($resp.StatusCode -ne 200) { throw "verification failed: HTTP $($resp.StatusCode)" }
+# Check VISIBLE text, not raw HTML: the 08-29 miss was FIRE<b>PLACE</b> split spans,
+# which no contiguous-string match on markup can see. Strip tags first, then assert
+# the brand is present AND the old brand is absent (domain URLs live in attributes,
+# so they are stripped along with the tags and cannot false-positive here).
+$visible = ($resp.Content -replace '<[^>]*>', ' ') -replace '\s+', ' '
+if ($visible -notmatch 'Umbra') { throw 'verification failed: visible text lacks "Umbra"' }
+if ($visible -match '(?i)fireplace') { throw 'verification failed: OLD BRAND visible on the page' }
+Write-Host 'VERIFIED: /welcome/ serves the landing page (Umbra present, old brand absent).'
 
 $assetPaths = [regex]::Matches($resp.Content, '/welcome/assets/[^"> ]+\.(?:css|js)') |
   ForEach-Object { $_.Value } |
